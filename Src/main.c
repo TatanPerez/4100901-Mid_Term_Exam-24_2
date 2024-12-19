@@ -1,5 +1,5 @@
 // Access Control System Implementation
-
+#include <stdio.h>
 #include "gpio.h"
 #include "systick.h"
 #include "uart.h"
@@ -19,15 +19,18 @@ void run_state_machine(void) {
     switch (current_state) {
         case LOCKED:
             // No periodic action in locked state
+            gpio_set_door_led_state(0); // LED apagado cuando está bloqueado
             break;
         case TEMP_UNLOCK:
             if (systick_GetTick() - unlock_timer >= TEMP_UNLOCK_DURATION) {
                 gpio_set_door_led_state(0); // Turn off door state LED
                 current_state = LOCKED;
+                usart2_send_string("DOOR_LOCKED\r\n"); // Enviar mensaje "DOOR_LOCKED"
             }
             break;
         case PERM_UNLOCK:
             // No periodic action in permanent unlock state
+            gpio_set_door_led_state(1); // LED encendido cuando está permanentemente desbloqueado
             break;
     }
 }

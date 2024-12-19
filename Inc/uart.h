@@ -4,8 +4,10 @@
 
 #include <stdint.h>
 
-// Base addresses for USART peripherals
+// Base addresses for USART peripherals (assuming STM32L4 family)
+#define USART1_BASE  0x40013800UL
 #define USART2_BASE  0x40004400UL
+#define USART3_BASE  0x40004800UL
 
 // Define USART_TypeDef structure to match hardware registers
 typedef struct {
@@ -23,7 +25,9 @@ typedef struct {
 } USART_TypeDef;
 
 // Map USART base addresses to USART_TypeDef structures
+#define USART1 ((USART_TypeDef *) USART1_BASE)
 #define USART2 ((USART_TypeDef *) USART2_BASE)
+#define USART3 ((USART_TypeDef *) USART3_BASE)
 
 // Bit definitions for USART_CR1 register
 #define USART_CR1_UE      (1U << 0)    // USART enable
@@ -45,7 +49,7 @@ typedef struct {
 
 
 // Baud rate register definition for 4 MHz APB clock and 9600 baud rate
-#define BAUD_9600_4MHZ   (0x1A1)       // Calculated value for 9600 baud rate with 4 MHz APB clock
+#define BAUD_9600_4MHZ   (0x1A1)       // Calculated value for 9600 baud rate with 4 MHz APB clock  0x683
 
 
 typedef enum {
@@ -53,7 +57,7 @@ typedef enum {
     CMD_OPEN,
     CMD_CLOSE
 } command_t;
-
+void UART_clock_enable(USART_TypeDef * UARTx);
 void usart2_init(void);
 void usart2_send_string(const char *str);
 

@@ -47,14 +47,13 @@ void configure_gpio(void);
 // state = 0: LED apagado (puerta bloqueada)
 // state = 1: LED encendido (puerta desbloqueada)
 void gpio_set_door_led_state(uint8_t state);
-
+void init_gpio_pin(GPIO_t *GPIOx, uint8_t pin, uint8_t mode);
 // LED de latido (heartbeat)
 void gpio_toggle_heartbeat_led(void);
 
 // Lectura de botones (simple/doble pulsación se maneja en otra capa)
 uint8_t button_driver_get_event(void);
-
-
+void detect_button_press(void);
 void configure_gpio_for_usart(void);
 
 #endif // GPIO_H
