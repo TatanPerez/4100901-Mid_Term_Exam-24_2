@@ -20,7 +20,7 @@ void UART_clock_enable(USART_TypeDef * UARTx) {
 
 //     *RCC_APB1ENR1 |= RCC_APB1ENR1_USART2EN;
 
-//     // TODO: Configurar UART2
+    // TODO: Configurar UART2
 
 //     // Activar interrupción de RXNE
 //     USART2->CR1 |= USART_CR1_RXNEIE; 

@@ -53,9 +53,9 @@ typedef struct {
 
 
 typedef enum {
-    CMD_NONE,
-    CMD_OPEN,
-    CMD_CLOSE
+    CMD_NONE = 0,
+    CMD_OPEN = 'O',
+    CMD_CLOSE = 'C'
 } command_t;
 void UART_clock_enable(USART_TypeDef * UARTx);
 void usart2_init(void);
